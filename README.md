@@ -29,7 +29,7 @@ Hooks into five Claude Code lifecycle events and appends a structured JSON recor
 
 ## Installation
 
-Copy `settings.json` into your Claude Code project directory (alongside `.claude/`) or merge it into an existing `settings.json`:
+Copy `settings.json` into your Claude Code project directory (typically, `~/.claude/`) or merge it into an existing `settings.json`:
 
 ```sh
 cp settings.json /path/to/your/project/settings.json
