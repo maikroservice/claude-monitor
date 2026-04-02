@@ -1,0 +1,57 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -c '{ts: now | todate, event: \"pre\", session: .session_id, tool: .tool_name, id: .tool_use_id, cwd: .cwd, input: .tool_input}' >> ~/.claude/audit.jsonl"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -c '{ts: now | todate, event: \"post\", session: .session_id, tool: .tool_name, id: .tool_use_id, cwd: .cwd, input: .tool_input}' >> ~/.claude/audit.jsonl"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -c '{ts: now | todate, event: \"error\", session: .session_id, tool: .tool_name, id: .tool_use_id, cwd: .cwd, input: .tool_input}' >> ~/.claude/audit.jsonl"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -c '{ts: now | todate, event: \"session_start\", session: .session_id, cwd: .cwd}' >> ~/.claude/audit.jsonl"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -c '{ts: now | todate, event: \"session_end\", session: .session_id}' >> ~/.claude/audit.jsonl"
+          }
+        ]
+      }
+    ]
+  }
+}
